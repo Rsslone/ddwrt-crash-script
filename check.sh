@@ -8,9 +8,10 @@ if [ -z "$SERVICE_NAME" ]; then
 fi
 
 STATUS=$(/opt/etc/init.d/rc.unslung check "$SERVICE_NAME")
+DATE=$(date "+%D %T")
 
 echo "$STATUS" | grep -q "dead"
 if [ $? -eq 0 ]; then
-    echo "$SERVICE_NAME is dead. Attempting to start..."
+    echo "$DATE : $SERVICE_NAME is dead. Attempting to start..."
     /opt/etc/init.d/rc.unslung start "$SERVICE_NAME"
 fi
